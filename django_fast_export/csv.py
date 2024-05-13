@@ -37,7 +37,7 @@ class StreamingCSVResponse(StreamingHttpResponse):
 
         def generate():
             yield all_verbose_names(queryset.model)
-            yield from (all_values(instance) for instance in queryset)
+            yield from (all_values(instance) for instance in queryset.iterator())
 
         return cls(generate(), filename=filename)
 
